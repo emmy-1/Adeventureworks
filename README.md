@@ -50,28 +50,33 @@ Tasks:
 
 Data Preparation:
 
-Clean and preprocess the AdventureWorks dataset for analysis.
-Merge relevant tables to create a unified dataset for the dashboard.
+- ETL Pipeline for the AdventureWorks dataset for analysis.
+- Merge relevant tables to create a unified dataset for the dashboard.
+
+
 Dashboard Development:
 
-Utilize a dashboard development tool (e.g., Power BI, Tableau) to create visualizations.
-Implement the layout based on stakeholder preferences and requirements.
+- Utilize a dashboard development tool (e.g., Power BI, Tableau) to create visualizations.
+- Implement the layout based on stakeholder preferences and requirements.
+
 Machine Learning Model Development:
 
-Choose a suitable machine learning algorithm for sales forecasting and recommendation.
-Train the model using historical data and validate its accuracy.
+- Choose a suitable machine learning algorithm for sales forecasting and recommendation.
+- Train the model using historical data and validate its accuracy.
 Integration:
 
-Integrate the machine learning model into the dashboard for seamless predictions.
-Ensure data flow between the dashboard and the machine learning components.
+- Integrate the machine learning model into the dashboard for seamless predictions.
+- Ensure data flow between the dashboard and the machine learning components.
+
+
 Testing:
 
-Conduct thorough testing of the dashboard and machine learning model integration.
-Identify and address any issues or bugs during the testing phase.
+- Conduct thorough testing of the dashboard and machine learning model integration.
+- Identify and address any issues or bugs during the testing phase.
 Deployment:
 
-Deploy the finalized dashboard and machine learning model to the production environment.
-Provide documentation and training for end-users on dashboard usage and interpretation.
+- Deploy the finalized dashboard and machine learning model to the production environment.
+- Provide documentation and training for end-users on dashboard usage and interpretation.
 Maintenance and Updates:
 
-Establish a plan for ongoing maintenance and updates to accommodate changes in business requirements or technology updates.
+- Establish a plan for ongoing maintenance and updates to accommodate changes in business requirements or technology updates.
