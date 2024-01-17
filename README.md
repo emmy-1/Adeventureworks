@@ -22,29 +22,31 @@ Adventure Works has assigned me the task of creating a dashboard that will provi
 
 
 
-
-
 Specifications:
 
-User-Friendly Interface:
+- User-Friendly Interface:
 
-Design an intuitive and user-friendly dashboard interface.
+- Design an intuitive and user-friendly dashboard interface.
 Include interactive charts, graphs, and filters for a personalized user experience.
+
+
 Real-Time Updates:
 
-Enable real-time or near-real-time updates to keep the dashboard current.
-Implement automatic data refresh mechanisms for the latest insights.
+- Enable real-time or near-real-time updates to keep the dashboard current.
+- Implement automatic data refresh mechanisms for the latest insights.
 Scalability:
 
-Design the dashboard to handle increased data volumes as the business grows.
-Ensure scalability in terms of adding new features or data sources.
+- Design the dashboard to handle increased data volumes as the business grows.
+- Ensure scalability in terms of adding new features or data sources.
+
 Security:
 
-Implement robust security measures to protect sensitive business data.
-Provide role-based access control to restrict data access based on user roles.
+- Implement robust security measures to protect sensitive business data.
+- Provide role-based access control to restrict data access based on user roles.
+
 Mobile Responsiveness:
 
-Ensure the dashboard is accessible and functional on various devices, including mobile phones and tablets.
+- Ensure the dashboard is accessible and functional on various devices, including mobile phones and tablets.
 
 Tasks:
 
