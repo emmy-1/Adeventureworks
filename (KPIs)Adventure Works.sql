@@ -59,6 +59,14 @@ Join dbo.Productinfo as pq
 ON pp.ProductSubcategoryID = pq.ProductSubcategoryID
 GROUP BY pp.ProductCategoryID,pp.Name
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*Total Sales by Region*/
+Select s.TerritoryID, t.[Group],t.Name,t.CountryRegionCode, SUM(s.TotalDue) as Total, t.SalesYTD
+from Sales.SalesOrderHeader as s
+JOIN Sales.SalesTerritory as t
+ON s.TerritoryID = t.TerritoryID
+GROUP BY s.TerritoryID, t.[Group],t.Name,t.CountryRegionCode, t.SalesYTD
+
 
 
 
@@ -68,9 +76,8 @@ GROUP BY pp.ProductCategoryID,pp.Name
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 select * from Sales.SalesOrderHeader
+select * from Sales.SalesTerritory
 select * from Sales.SalesOrderDetail
-select * from Production.Product
-select * from Production.ProductCategory
-select * from Production.ProductSubcategory
+select * from Sales.SalesTerritoryHistory
 
 Select 
