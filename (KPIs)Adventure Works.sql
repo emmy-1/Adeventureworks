@@ -70,7 +70,7 @@ GROUP BY s.TerritoryID, t.[Group],t.Name,t.CountryRegionCode, t.SalesYTD
 
 
 
-
+select * from sales 
 
 
 
@@ -80,4 +80,6 @@ select * from Sales.SalesTerritory
 select * from Sales.SalesOrderDetail
 select * from Sales.SalesTerritoryHistory
 
-Select 
+Select * from Sales.vIndividualCustomer
+Select * from Sales.Customer
+Select * from Person.ContactType
