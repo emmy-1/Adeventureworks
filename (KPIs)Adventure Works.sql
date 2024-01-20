@@ -102,9 +102,26 @@ GROUP BY c.CreditCardID, u.BusinessEntityID,c.CustomerID, c.AccountNumber
 select * from Customerfinanicaldetails
 Select * from Sales.Customer
 
+/*Customer Finace tbale contaning the customerid, bussinessiD and total sales*/
+/*CREATE VIEW CustomerFinance As*/
 
-Select cc.CustomerID , cc.CreditCardID, cc.BusinessEntityID,sc.StoreID, sc.TerritoryID
+Select cc.CustomerID , cc.CreditCardID, cc.BusinessEntityID, sc.TerritoryID, cc.TotalSales
 from Customerfinanicaldetails as cc
 LEFT JOIN Sales.Customer as sc
 ON cc.CustomerID = sc.CustomerID
-GROUP BY cc.CustomerID, cc.CreditCardID, cc.BusinessEntityID, sc.StoreID, sc.TerritoryID
+GROUP BY cc.CustomerID, cc.CreditCardID, cc.BusinessEntityID, sc.TerritoryID,cc.TotalSales
+
+SELECT * FROM dbo.CustomerFinance
+Select * from Sales.vIndividualCustomer
+
+/*Customer information*/
+
+SELECT ic.BusinessEntityID, cf.CustomerID,ic.Title,ic.FirstName,ic.MiddleName,ic.LastName,ic.PhoneNumber,ic.PhoneNumberType, ic.EmailAddress, ic.AddressType,
+ic.AddressLine1,ic.AddressLine2,ic.City,ic.StateProvinceName,ic.PostalCode,ic.CountryRegionName, cf.CreditCardID,cf.TerritoryID,SUM (cf.TotalSales)
+from Sales.vIndividualCustomer as ic
+JOIN dbo.CustomerFinance as cf
+ON ic.BusinessEntityID = cf.BusinessEntityID
+GROUP BY ic.BusinessEntityID, cf.CustomerID,ic.Title,ic.FirstName,ic.MiddleName,ic.LastName,ic.PhoneNumber,ic.PhoneNumberType, ic.EmailAddress, ic.AddressType,
+ic.AddressLine1,ic.AddressLine2,ic.City,ic.StateProvinceName,ic.PostalCode,ic.CountryRegionName, cf.CreditCardID,cf.TerritoryID
+
+
