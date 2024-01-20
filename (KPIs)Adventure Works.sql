@@ -75,11 +75,36 @@ select * from sales
 
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-select * from Sales.SalesOrderHeader
+
 select * from Sales.SalesTerritory
 select * from Sales.SalesOrderDetail
 select * from Sales.SalesTerritoryHistory
+Select * from Person.ContactType
+Select * from Sales.CreditCard
+select * from Sales.SalesOrderHeader
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+
 
 Select * from Sales.vIndividualCustomer
+
+
+
+/*Create VIEW Customerfinanicaldetails AS*/
+
+SELECT c.CreditCardID, u.BusinessEntityID,c.CustomerID , c.AccountNumber, SUM(c.TotalDue) as TotalSales
+from Sales.SalesOrderHeader as c
+JOIN Sales.PersonCreditCard as u
+ON c.CreditCardID = u.CreditCardID
+GROUP BY c.CreditCardID, u.BusinessEntityID,c.CustomerID, c.AccountNumber
+
+select * from Customerfinanicaldetails
 Select * from Sales.Customer
-Select * from Person.ContactType
+
+
+Select cc.CustomerID , cc.CreditCardID, cc.BusinessEntityID,sc.StoreID, sc.TerritoryID
+from Customerfinanicaldetails as cc
+LEFT JOIN Sales.Customer as sc
+ON cc.CustomerID = sc.CustomerID
+GROUP BY cc.CustomerID, cc.CreditCardID, cc.BusinessEntityID, sc.StoreID, sc.TerritoryID
