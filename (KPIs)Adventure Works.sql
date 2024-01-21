@@ -116,3 +116,31 @@ GROUP BY ic.BusinessEntityID, cf.CustomerID,ic.Title,ic.FirstName,ic.MiddleName,
 ic.AddressLine1,ic.AddressLine2,ic.City,ic.StateProvinceName,ic.PostalCode,ic.CountryRegionName, cf.CreditCardID,cf.TerritoryID
 
 
+/*Product inventory*/
+/*Create View Productinventory*/
+
+Select * from Production.Product
+Select * from Production.ProductInventory
+Select p1.ProductID, p1.ProductNumber, p1.ProductSubcategoryID, p1.Name, psc.Name as Subcategory, p1.SafetyStockLevel,p2.Quantity,  p2.LocationID, p2.Shelf, p2.Bin, p1.DaysToManufacture, p1.SellStartDate as SellStartDate,
+p1.SellEndDate as SellEndDate, p1.StandardCost, p1.ListPrice, p1.ReorderPoint /*(SellStartDate - SellEndDate) as Selftime */
+from Production.Product as p1
+INNER JOIN Production.ProductInventory as p2
+ON p1.ProductID = p2.ProductID
+LEFT JOIN  -- Use LEFT JOIN to handle cases where ProductSubcategoryID is NULL
+    Production.ProductSubcategory AS psc ON p1.ProductSubcategoryID = psc.ProductSubcategoryID
+GROUP BY  p1.ProductID, p1.ProductNumber, p1.ProductSubcategoryID, p1.Name, psc.Name, p1.SafetyStockLevel, p2.Quantity, p2.LocationID, p2.Shelf, p2.Bin,  p1.DaysToManufacture,p1.SellStartDate, 
+p1.SellEndDate, p1.StandardCost, p1.ListPrice, p1.ReorderPoint
+
+
+
+/* Supply Chain Process*/
+
+/*Total Order placed by year, month, Quater*/
+
+select * from Sales.SalesOrderHeader
+select YEAR(OrderDate) as Year, DATEPART(QUARTER, OrderDate) AS OrderQuarter, MONTH(OrderDate) as Month, COUNT(DISTINCT SalesOrderID) AS TotalOrders, SUM(TotalDue) as Total_Order_value
+, AVG(TotalDue) as AverageOrderValue
+from Sales.SalesOrderHeader
+GROUP BY  YEAR(OrderDate),MONTH(OrderDate),DATEPART(QUARTER, OrderDate)
+
+/*
