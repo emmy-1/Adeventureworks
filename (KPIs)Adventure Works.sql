@@ -68,12 +68,6 @@ ON s.TerritoryID = t.TerritoryID
 GROUP BY s.TerritoryID, t.[Group],t.Name,t.CountryRegionCode, t.SalesYTD
 
 
-
-
-select * from sales 
-
-
-
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 select * from Sales.SalesTerritory
@@ -85,13 +79,9 @@ select * from Sales.SalesOrderHeader
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
-
-
 Select * from Sales.vIndividualCustomer
 
-
-
-/*Create VIEW Customerfinanicaldetails AS*/
+/*Create VIEW Customerfinanicaldetails AS
 
 SELECT c.CreditCardID, u.BusinessEntityID,c.CustomerID , c.AccountNumber, SUM(c.TotalDue) as TotalSales
 from Sales.SalesOrderHeader as c
@@ -112,12 +102,13 @@ ON cc.CustomerID = sc.CustomerID
 GROUP BY cc.CustomerID, cc.CreditCardID, cc.BusinessEntityID, sc.TerritoryID,cc.TotalSales
 
 SELECT * FROM dbo.CustomerFinance
-Select * from Sales.vIndividualCustomer
+Select * from Sales.vIndividualCustomer*/
 
 /*Customer information*/
+/*CREATE VIEW Customer AS*/
 
 SELECT ic.BusinessEntityID, cf.CustomerID,ic.Title,ic.FirstName,ic.MiddleName,ic.LastName,ic.PhoneNumber,ic.PhoneNumberType, ic.EmailAddress, ic.AddressType,
-ic.AddressLine1,ic.AddressLine2,ic.City,ic.StateProvinceName,ic.PostalCode,ic.CountryRegionName, cf.CreditCardID,cf.TerritoryID,SUM (cf.TotalSales)
+ic.AddressLine1,ic.AddressLine2,ic.City,ic.StateProvinceName,ic.PostalCode,ic.CountryRegionName, cf.CreditCardID,cf.TerritoryID,SUM (cf.TotalSales) as Sales
 from Sales.vIndividualCustomer as ic
 JOIN dbo.CustomerFinance as cf
 ON ic.BusinessEntityID = cf.BusinessEntityID
