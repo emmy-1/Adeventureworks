@@ -1,4 +1,4 @@
 import webbrowser
 
-url = "https://www.example.com"
+url = "https://public.tableau.com/app/profile/emmanuel.adegboyega.obayomi/viz/Adventurework_17059310189110/MainDashboard?publish=yes"
 webbrowser.open(url)
