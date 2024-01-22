@@ -16,9 +16,10 @@ EXEC TotalSalesperyear @OrderDate = 2014
 
 
 /* Total Sum of sales for each year*/
-Select YEAR (OrderDate) as Year, Sum(TotalDue) AS TotalSales
+Select YEAR (OrderDate) as Year, Month(OrderDate) as month, DAY(OrderDate) as Day, Sum(TotalDue) AS TotalSales
 from Sales.SalesOrderHeader
-GROUP BY YEAR (OrderDate)
+GROUP BY YEAR (OrderDate),Month(OrderDate),DAY(OrderDate) 
+select * from Sales.SalesOrderHeader
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /* View Created to join the Production.productsubcategory and Production.ProductCategory.  Uncheck to run view*/
