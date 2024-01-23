@@ -21,7 +21,7 @@ from Sales.SalesOrderHeader
 GROUP BY YEAR (OrderDate),Month(OrderDate),DAY(OrderDate)*/
 
 select * from Sales.SalesOrderHeader
-
+/* Common Table Experssion to extract the SALES DETAILS*/
 With SalesOrder AS (
     select SalesOrderID,RevisionNumber,OrderDate, Year(OrderDate) as OrderYear, Month(OrderDate) as OrderMonth, Day(OrderDate) as OrderDay, DueDate, ShipDate, Status,
     OnlineOrderFlag, SalesOrderNumber, PurchaseOrderNumber, AccountNumber, CustomerID, SalesPersonID, TerritoryID, BillToAddressID, ShipToAddressID,
@@ -33,6 +33,10 @@ With SalesOrder AS (
 )
 select * from SalesOrder 
 
+/* PROUDCT BY SALES*/
+Select SalesOrderID, OrderQty,ProductID,UnitPrice,LineTotal, SUM(UnitPrice * OrderQty) as Reveune
+from Sales.SalesOrderDetail
+Group BY SalesOrderID, OrderQty,ProductID,UnitPrice,LineTotal
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /* View Created to join the Production.productsubcategory and Production.ProductCategory.  Uncheck to run view*/
