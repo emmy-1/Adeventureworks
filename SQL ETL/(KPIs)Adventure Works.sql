@@ -16,10 +16,23 @@ EXEC TotalSalesperyear @OrderDate = 2014
 
 
 /* Total Sum of sales for each year*/
-Select YEAR (OrderDate) as Year, Month(OrderDate) as month, DAY(OrderDate) as Day, Sum(TotalDue) AS TotalSales
+/*Select YEAR (OrderDate) as Year, Month(OrderDate) as month, DAY(OrderDate) as Day, Sum(TotalDue) AS TotalSales
 from Sales.SalesOrderHeader
-GROUP BY YEAR (OrderDate),Month(OrderDate),DAY(OrderDate) 
+GROUP BY YEAR (OrderDate),Month(OrderDate),DAY(OrderDate)*/
+
 select * from Sales.SalesOrderHeader
+
+With SalesOrder AS (
+    select SalesOrderID,RevisionNumber,OrderDate, Year(OrderDate) as OrderYear, Month(OrderDate) as OrderMonth, Day(OrderDate) as OrderDay, DueDate, ShipDate, Status,
+    OnlineOrderFlag, SalesOrderNumber, PurchaseOrderNumber, AccountNumber, CustomerID, SalesPersonID, TerritoryID, BillToAddressID, ShipToAddressID,
+    ShipMethodID, CreditCardID,CreditCardApprovalCode, CurrencyRateID,SubTotal,TaxAmt,Freight,TotalDue
+    From Sales.SalesOrderHeader
+    GROUP BY SalesOrderID,RevisionNumber,OrderDate, Year(OrderDate), Month(OrderDate), Day(OrderDate), DueDate, ShipDate, Status,
+    OnlineOrderFlag, SalesOrderNumber, PurchaseOrderNumber, AccountNumber, CustomerID, SalesPersonID, TerritoryID, BillToAddressID, ShipToAddressID,
+    ShipMethodID, CreditCardID,CreditCardApprovalCode, CurrencyRateID,SubTotal,TaxAmt,Freight,TotalDue 
+)
+select * from SalesOrder 
+
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /* View Created to join the Production.productsubcategory and Production.ProductCategory.  Uncheck to run view*/
