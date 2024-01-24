@@ -46,7 +46,46 @@ from Production.ProductCategory as pd
 inner join Production.ProductSubcategory as pc
 ON pd.ProductCategoryID = pc.ProductCategoryID
 GROUP BY pd.ProductCategoryID, pc.ProductSubcategoryID, pd.Name , Pc.Name 
+
 Select * from dbo.ProductDetails
+Select * from Production.Product
+
+
+
+select * from Production.ProductCategory
+select * from Production.ProductSubCategory
+
+
+Select SalesOrderID, SalesOrderDetailID, CarrierTrackingNumber, OrderQty, ProductID, SpecialOfferID, unitPrice, UnitPriceDiscount,LineTotal
+from Sales.SalesOrderDetail
+
+
+SELECT ProductID, Name, ProductNumber, SafetyStockLevel, ReorderPoint,StandardCost, ListPrice, DaysToManufacture,ProductSubcategoryID
+From Production.Product
+
+SELECT
+    sod.SalesOrderID,
+    sod.ProductID,
+    sod.OrderQty,
+    sod.UnitPrice,
+    sod.LineTotal,
+    soh.TaxAmt,
+    soh.Freight,
+    soh.TotalDue
+FROM
+    Sales.SalesOrderDetail AS sod
+JOIN
+    Sales.SalesOrderHeader AS soh ON sod.SalesOrderID = soh.SalesOrderID
+GROUP BY sod.SalesOrderID,
+    sod.ProductID,
+    sod.OrderQty,
+    sod.UnitPrice,
+    sod.LineTotal,
+    soh.TaxAmt,
+    soh.Freight,
+    soh.TotalDue
+
+
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*Created View for ProductInfo. this joins the production.productID with the ProductID in the Sales Order table*/
 /*Create VIEW ProductInfo AS*/

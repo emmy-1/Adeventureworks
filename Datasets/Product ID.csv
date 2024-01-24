@@ -1,0 +1,38 @@
+ProductCategoryID,ProductSubcategoryID,Name,ProductSubName
+1,1,Bikes,Mountain Bikes
+1,2,Bikes,Road Bikes
+1,3,Bikes,Touring Bikes
+2,4,Components,Handlebars
+2,5,Components,Bottom Brackets
+2,6,Components,Brakes
+2,7,Components,Chains
+2,8,Components,Cranksets
+2,9,Components,Derailleurs
+2,10,Components,Forks
+2,11,Components,Headsets
+2,12,Components,Mountain Frames
+2,13,Components,Pedals
+2,14,Components,Road Frames
+2,15,Components,Saddles
+2,16,Components,Touring Frames
+2,17,Components,Wheels
+3,18,Clothing,Bib-Shorts
+3,19,Clothing,Caps
+3,20,Clothing,Gloves
+3,21,Clothing,Jerseys
+3,22,Clothing,Shorts
+3,23,Clothing,Socks
+3,24,Clothing,Tights
+3,25,Clothing,Vests
+4,26,Accessories,Bike Racks
+4,27,Accessories,Bike Stands
+4,28,Accessories,Bottles and Cages
+4,29,Accessories,Cleaners
+4,30,Accessories,Fenders
+4,31,Accessories,Helmets
+4,32,Accessories,Hydration Packs
+4,33,Accessories,Lights
+4,34,Accessories,Locks
+4,35,Accessories,Panniers
+4,36,Accessories,Pumps
+4,37,Accessories,Tires and Tubes
