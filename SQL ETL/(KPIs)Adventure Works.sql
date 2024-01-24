@@ -55,9 +55,53 @@ Select * from Production.Product
 select * from Production.ProductCategory
 select * from Production.ProductSubCategory
 
+/*Finding the profit and Profit margine*/
 
 Select SalesOrderID, SalesOrderDetailID, CarrierTrackingNumber, OrderQty, ProductID, SpecialOfferID, unitPrice, UnitPriceDiscount,LineTotal
 from Sales.SalesOrderDetail
+
+select * from Production.Product
+
+/*CREATE VIEW Productinfomation AS
+
+Select tth.SalesOrderID, tth.SalesOrderDetailID, tth.CarrierTrackingNumber, tth.OrderQty, tth.ProductID, tth.SpecialOfferID, tth.unitPrice, 
+tth.UnitPriceDiscount,tth.LineTotal,ytt.ProductNumber, ytt.SafetyStockLevel, ytt.ReorderPoint,ytt.StandardCost, ytt.ListPrice, 
+ytt.DaysToManufacture,ytt.ProductSubcategoryID
+from Sales.SalesOrderDetail as tth
+INNER JOIN Production.Product ytt
+ON tth.ProductID = ytt.ProductID 
+Group BY tth.SalesOrderID, tth.SalesOrderDetailID, tth.CarrierTrackingNumber, tth.OrderQty, tth.ProductID, tth.SpecialOfferID, tth.unitPrice, 
+tth.UnitPriceDiscount,tth.LineTotal,ytt.ProductNumber, ytt.SafetyStockLevel, ytt.ReorderPoint,ytt.StandardCost, ytt.ListPrice, 
+ytt.DaysToManufacture,ytt.ProductSubcategoryID*/
+
+/* Common Expression table to calculate the profit from each sales Calculation*/
+
+with Product As
+(
+Select SalesOrderID, SalesOrderDetailID,CarrierTrackingNumber,OrderQty, ProductID, SpecialOfferID,unitPrice, 
+UnitPriceDiscount,LineTotal,ProductNumber,SafetyStockLevel,ReorderPoint,StandardCost, (StandardCost * OrderQty) As Costofgoods,
+ListPrice, DaysToManufacture,ProductSubcategoryID
+From Productinfomation
+GROUP BY SalesOrderID, SalesOrderDetailID,CarrierTrackingNumber,OrderQty, ProductID, SpecialOfferID,unitPrice, 
+UnitPriceDiscount,LineTotal,ProductNumber,SafetyStockLevel,ReorderPoint,StandardCost, 
+ListPrice, DaysToManufacture,ProductSubcategoryID
+)
+Select SalesOrderID, SalesOrderDetailID,CarrierTrackingNumber,OrderQty, ProductID, SpecialOfferID,unitPrice, 
+UnitPriceDiscount,LineTotal,ProductNumber,SafetyStockLevel,ReorderPoint,StandardCost, Costofgoods,SUM(LineTotal - Costofgoods) AS Profit,
+ListPrice, DaysToManufacture,ProductSubcategoryID
+From Product
+GROUP BY SalesOrderID, SalesOrderDetailID,CarrierTrackingNumber,OrderQty, ProductID, SpecialOfferID,unitPrice, 
+UnitPriceDiscount,LineTotal,ProductNumber,SafetyStockLevel,ReorderPoint,StandardCost, Costofgoods,
+ListPrice, DaysToManufacture,ProductSubcategoryID
+
+
+
+
+
+
+
+
+
 
 
 SELECT ProductID, Name, ProductNumber, SafetyStockLevel, ReorderPoint,StandardCost, ListPrice, DaysToManufacture,ProductSubcategoryID
