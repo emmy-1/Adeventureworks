@@ -95,9 +95,10 @@ UnitPriceDiscount,LineTotal,ProductNumber,SafetyStockLevel,ReorderPoint,Standard
 ListPrice, DaysToManufacture,ProductSubcategoryID
 
 
-Select * from Sales.SalesTerritory
+Select TerritoryID, Name, CountryRegionCode, [Group], SalesYTD, SalesLastYear,CostYTD,CostLastYear
+from Sales.SalesTerritory
 Select * from Sales.SalesOrderHeader
-
+Select * from dbo.Store_TerritoryiD
 
 
 
