@@ -98,9 +98,7 @@ ListPrice, DaysToManufacture,ProductSubcategoryID
 Select TerritoryID, Name, CountryRegionCode, [Group], SalesYTD, SalesLastYear,CostYTD,CostLastYear
 from Sales.SalesTerritory
 Select * from Sales.SalesOrderHeader
-Select * from dbo.Store_TerritoryiD
-
-
+Select * from Sales.SalesOrderDetail
 
 
 
@@ -246,4 +244,56 @@ select YEAR(OrderDate) as Year, DATEPART(QUARTER, OrderDate) AS OrderQuarter, MO
 from Sales.SalesOrderHeader
 GROUP BY  YEAR(OrderDate),MONTH(OrderDate),DATEPART(QUARTER, OrderDate)
 
-/*
+
+
+
+/*CUSTOMER SEGEMENTATION*/
+
+CREATE VIEW CustomerDemo AS (
+Select * from Sales.vPersonDemographics
+Where DateFirstPurchase IS NOT NULL
+)
+select Distinct YEAR(BirthDate)
+from dbo.CustomerDemo
+select Distinct Occupation
+from dbo.CustomerDemo
+
+/* CUSTOMER SEGEMENTS */
+/*Create View CustomerSegment AS*/
+select BusinessEntityID, TotalPurchaseYTD, DateFirstPurchase, BirthDate,
+                                CASE
+                                WHEN DATEDIFF(YEAR, BirthDate, GETDATE()) BETWEEN 18 AND 25 THEN '18-25'
+                                WHEN DATEDIFF(YEAR, BirthDate, GETDATE()) BETWEEN 26 AND 35 THEN '26-35'
+                                WHEN DATEDIFF(YEAR, BirthDate, GETDATE()) BETWEEN 36 AND 45 THEN '36-45'
+                                WHEN DATEDIFF(YEAR, BirthDate, GETDATE()) BETWEEN 46 AND 55 THEN '46-55'
+                                WHEN DATEDIFF(YEAR, BirthDate, GETDATE()) BETWEEN 56 AND 65 THEN '56-65'
+                                WHEN DATEDIFF(YEAR, BirthDate, GETDATE()) >= 66 THEN '66+'
+                                ELSE 'Unknown'
+    END AS AgeGroup,
+MaritalStatus, YearlyIncome , (SELECT CASE 
+                                WHEN YearlyIncome = '0-25000' THEN 'Least Income'
+                                WHEN YearlyIncome = '25001-50000' THEN 'Low Income'
+                                WHEN YearlyIncome = '50001-75000' THEN 'Medium Income'
+                                WHEN YearlyIncome = '75001-100000 'THEN 'High Income'
+                                WHEN YearlyIncome ='greater than 100000' THEN 'Highest Income'
+                                ELSE 'Unknown'
+                                END
+                                ) AS IncomeGroup,
+                                Gender, TotalChildren,
+                                CASE
+                                WHEN TotalChildren > '0' THEN 'TRUE'
+                                WHEN TotalChildren = '0' THEN 'FALSE'
+                                ELSE 'None'
+                                END As ParentalStatus,
+                                NumberChildrenAtHome, Education, Occupation,
+                                 CASE
+                                WHEN Education = 'Graduate Degree' THEN 'Highly Educated '
+                                WHEN Education = 'Bachelors' THEN 'Educated'
+                                WHEN Education IN ('High School', 'Partial High School', 'Partial College') THEN 'Least Educated'
+                                ELSE 'Other'
+    END AS EducationSegment,
+     HomeOwnerFlag,NumberCarsOwned
+                            from dbo.CustomerDemo
+
+
+Select * from dbo.CustomerSegment
