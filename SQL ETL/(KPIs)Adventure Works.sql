@@ -282,8 +282,7 @@ MaritalStatus, YearlyIncome , (SELECT CASE
                                 Gender, TotalChildren,
                                 CASE
                                 WHEN TotalChildren > '0' THEN 'TRUE'
-                                WHEN TotalChildren = '0' THEN 'FALSE'
-                                ELSE 'None'
+                                ELSE 'FALSE'
                                 END As ParentalStatus,
                                 NumberChildrenAtHome, Education, Occupation,
                                  CASE
@@ -292,8 +291,12 @@ MaritalStatus, YearlyIncome , (SELECT CASE
                                 WHEN Education IN ('High School', 'Partial High School', 'Partial College') THEN 'Least Educated'
                                 ELSE 'Other'
     END AS EducationSegment,
-     HomeOwnerFlag,NumberCarsOwned
+     HomeOwnerFlag,NumberCarsOwned,CASE 
+                                    WHEN NumberCarsOwned >'0' THEN 'TRUE'
+                                    Else 'FALSE'
+                                    END AS OwnsAcar
+
                             from dbo.CustomerDemo
 
 
-Select * from dbo.CustomerSegment
+Select Distinct IncomeGroup from dbo.CustomerSegment
