@@ -260,7 +260,7 @@ from dbo.CustomerDemo
 
 /* CUSTOMER SEGEMENTS */
 /*Create View CustomerSegment AS*/
-select BusinessEntityID, TotalPurchaseYTD, DateFirstPurchase, BirthDate,
+select BusinessEntityID, TotalPurchaseYTD, DateFirstPurchase, Day(DateFirstPurchase) as dayofpurchase,  BirthDate,
                                 CASE
                                 WHEN DATEDIFF(YEAR, BirthDate, GETDATE()) BETWEEN 18 AND 25 THEN '18-25'
                                 WHEN DATEDIFF(YEAR, BirthDate, GETDATE()) BETWEEN 26 AND 35 THEN '26-35'
