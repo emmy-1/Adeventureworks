@@ -23,7 +23,7 @@ GROUP BY YEAR (OrderDate),Month(OrderDate),DAY(OrderDate)*/
 select * from Sales.SalesOrderHeader
 /* Common Table Experssion to extract the SALES DETAILS*/
 With SalesOrder AS (
-    select SalesOrderID,RevisionNumber,OrderDate, Year(OrderDate) as OrderYear, Month(OrderDate) as OrderMonth, Day(OrderDate) as OrderDay, DueDate, ShipDate, Status,
+    select SalesOrderID,RevisionNumber,OrderDate, Count(SalesOrderID) as OrderCount ,Year(OrderDate) as OrderYear, Month(OrderDate) as OrderMonth, Day(OrderDate) as OrderDay, DueDate, ShipDate, Status,
     OnlineOrderFlag, SalesOrderNumber, PurchaseOrderNumber, AccountNumber, CustomerID, SalesPersonID, TerritoryID, BillToAddressID, ShipToAddressID,
     ShipMethodID, CreditCardID,CreditCardApprovalCode, CurrencyRateID,SubTotal,TaxAmt,Freight,TotalDue
     From Sales.SalesOrderHeader
