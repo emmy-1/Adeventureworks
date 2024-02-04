@@ -300,3 +300,86 @@ MaritalStatus, YearlyIncome , (SELECT CASE
 
 
 Select Distinct IncomeGroup from dbo.CustomerSegment
+
+
+/*inventory management*/
+Select 
+    ProductID, 
+    Name, 
+    ProductNumber,
+    MakeFlag,
+    FinishedGoodsFlag,
+    SafetyStockLevel, 
+    ReorderPoint, 
+    StandardCost,
+    ListPrice,
+    DaysToManufacture,
+    ProductLine,
+    ProductSubcategoryID,
+    SellStartDate,
+    SellEndDate,
+        AVG(DATEDIFF(MONTH, SellStartDate, GETDATE())) AS AverageProductAgeInmonths
+ from Production.Product
+ Group BY
+    ProductID,
+    Name, 
+    ProductNumber,
+    MakeFlag,
+    FinishedGoodsFlag,
+    SafetyStockLevel, 
+    ReorderPoint, 
+    StandardCost,
+    ListPrice,
+    DaysToManufacture,
+    ProductLine,
+    ProductSubcategoryID,
+    SellStartDate,
+    SellEndDate
+Select 
+    ProductID, 
+    LocationID, 
+    Shelf, 
+    Bin, 
+    Quantity
+from Production.ProductInventory
+
+
+/* Prodcut Details Aggregate */
+SELECT 
+    pp.ProductID, 
+    pp.Name,
+    pp.ProductNumber,
+    pp.MakeFlag,
+    pp.FinishedGoodsFlag,
+    pp.SafetyStockLevel, 
+    pp.ReorderPoint, 
+    pp.StandardCost,
+    pp.ListPrice,
+    pp.DaysToManufacture,
+    pp.ProductLine,
+    pp.ProductSubcategoryID,
+    pp.SellStartDate,
+    pp.SellEndDate,
+    SUM(pi.Quantity) AS TotalQuantity
+FROM 
+    Production.Product AS pp
+INNER JOIN 
+    Production.ProductInventory AS pi ON pp.ProductID = pi.ProductID
+GROUP BY 
+    pp.ProductID, 
+    pp.Name,
+    pp.ProductNumber,
+    pp.MakeFlag,
+    pp.FinishedGoodsFlag,
+    pp.SafetyStockLevel, 
+    pp.ReorderPoint, 
+    pp.StandardCost,
+    pp.ListPrice,
+    pp.DaysToManufacture,
+    pp.ProductLine,
+    pp.ProductSubcategoryID,
+    pp.SellStartDate,
+    pp.SellEndDate;
+
+
+            /*AVG(DATEDIFF(MONTH, SellStartDate, GETDATE())) AS AverageProductAgeInmonths*/
