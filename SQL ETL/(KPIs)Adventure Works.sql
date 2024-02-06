@@ -383,3 +383,56 @@ GROUP BY
 
 
             /*AVG(DATEDIFF(MONTH, SellStartDate, GETDATE())) AS AverageProductAgeInmonths*/
+select * from Purchasing.PurchaseOrderDetail
+select * from Purchasing.PurchaseOrderHeader
+
+/* Visualizing the supply chain process, from order placement to product delivery, is essential.*/
+SELECT
+    pd.PurchaseOrderID,
+    pd.PurchaseOrderDetailID, 
+    ph.OrderDate,
+    pd.DueDate,
+    ph.ShipDate,
+    pd.ProductID,
+    ph.Status,
+    ph.EmployeeID,
+    ph.VendorID,
+    ph.ShipMethodID,
+    pd.OrderQty,
+    pd.UnitPrice,
+    pd.LineTotal,
+    pd.ReceivedQty,
+    pd.RejectedQty,
+    pd.StockedQty,
+    ph.SubTotal,
+    ph.TaxAmt,
+    ph.Freight,
+    ph.TotalDue
+    from Purchasing.PurchaseOrderDetail as pd
+    JOIN Purchasing.PurchaseOrderHeader ph
+    ON pd.PurchaseOrderID = ph.PurchaseOrderID
+GROUP BY pd.PurchaseOrderID,
+    pd.PurchaseOrderDetailID, 
+    ph.OrderDate,
+    pd.DueDate,
+    ph.ShipDate,
+    pd.OrderQty,
+    pd.ProductID,
+    ph.Status,
+    ph.EmployeeID,
+    ph.VendorID,
+    ph.ShipMethodID,
+    pd.UnitPrice,
+    pd.LineTotal,
+    pd.ReceivedQty,
+    pd.RejectedQty,
+    pd.StockedQty,
+    ph.SubTotal,
+    ph.TaxAmt,
+    ph.Freight,
+    ph.TotalDue
+    
+
+select * from Purchasing.Vendor
+select * from Sales.SalesOrderHeader
+select * from Sales.SalesOrderDetail
