@@ -393,6 +393,10 @@ SELECT
     ph.OrderDate,
     pd.DueDate,
     ph.ShipDate,
+           CASE
+        WHEN ShipDate <= DueDate THEN '1'
+        ELSE '0'
+    END AS DeliveryStatus,
     pd.ProductID,
     ph.Status,
     ph.EmployeeID,
@@ -403,13 +407,9 @@ SELECT
     pd.LineTotal,
     pd.ReceivedQty,
     pd.RejectedQty,
-    pd.StockedQty,
-    ph.SubTotal,
-    ph.TaxAmt,
-    ph.Freight,
-    ph.TotalDue
+    pd.StockedQty
     from Purchasing.PurchaseOrderDetail as pd
-    JOIN Purchasing.PurchaseOrderHeader ph
+    FUll JOIN Purchasing.PurchaseOrderHeader ph
     ON pd.PurchaseOrderID = ph.PurchaseOrderID
 GROUP BY pd.PurchaseOrderID,
     pd.PurchaseOrderDetailID, 
@@ -426,13 +426,12 @@ GROUP BY pd.PurchaseOrderID,
     pd.LineTotal,
     pd.ReceivedQty,
     pd.RejectedQty,
-    pd.StockedQty,
-    ph.SubTotal,
+    pd.StockedQty
+    
+/* ph.SubTotal,
     ph.TaxAmt,
     ph.Freight,
-    ph.TotalDue
-    
-
+    ph.TotalDue*/
 select * from Purchasing.Vendor
 select * from Sales.SalesOrderHeader
 select * from Sales.SalesOrderDetail
